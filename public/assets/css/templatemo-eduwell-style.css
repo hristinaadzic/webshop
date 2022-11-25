@@ -23,16 +23,16 @@ Table of contents
 12. portfolio
 
 --------------------------------------------- */
-/* 
+/*
 ---------------------------------------------
 font & reset css
---------------------------------------------- 
+---------------------------------------------
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900");
-/* 
+/*
 ---------------------------------------------
 reset
---------------------------------------------- 
+---------------------------------------------
 */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
 pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
@@ -113,10 +113,10 @@ img {
   overflow: hidden;
 }
 
-/* 
+/*
 ---------------------------------------------
 global styles
---------------------------------------------- 
+---------------------------------------------
 */
 html,
 body {
@@ -240,10 +240,10 @@ section {
 }
 
 
-/* 
+/*
 ---------------------------------------------
 header
---------------------------------------------- 
+---------------------------------------------
 */
 .background-header {
   background: rgb(219,138,222) !important;
@@ -664,10 +664,10 @@ header
 }
 
 
-/* 
+/*
 ---------------------------------------------
 banner
---------------------------------------------- 
+---------------------------------------------
 */
 
 section.main-banner {
@@ -745,7 +745,7 @@ section.main-banner {
 ---------------------------------------------
 services
 ---------------------------------------------
-*/ 
+*/
 
 .services .item {
   border-radius: 15px;
@@ -996,10 +996,10 @@ section.simple-cta p {
 }
 
 
-/* 
+/*
 ---------------------------------------------
 testimonials
---------------------------------------------- 
+---------------------------------------------
 */
 
 section.testimonials {
@@ -1087,31 +1087,31 @@ section.testimonials:after {
 
 
 
-/* 
+/*
 ---------------------------------------------
 contact us
---------------------------------------------- 
+---------------------------------------------
 */
 
 section.contact-us {
   background-image: url(../images/footer-bg.png);
-  background-position: center center;
+    background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 0px;
   position: relative;
 }
 
-section.contact-us:after {
-  position: absolute;
-  content: '';
-  background-image: url(../images/footer-left-dec.png);
-  left: 0px;
-  top: 60px;
-  width: 267px;
-  height: 396px;
-  z-index: 1;
-}
+/*section.contact-us:after {*/
+/*  position: absolute;*/
+/*  content: '';*/
+/*  background-image: url(../images/footer-left-dec.png);*/
+/*  left: 0px;*/
+/*  top: 60px;*/
+/*  width: 267px;*/
+/*  height: 396px;*/
+/*  z-index: 1;*/
+/*}*/
 
 section.contact-us .contact-info {
   background-color: #fff;
@@ -1720,10 +1720,10 @@ section.more-info .count-area-content .count-title {
 }
 
 
-/* 
+/*
 ---------------------------------------------
 responsive
---------------------------------------------- 
+---------------------------------------------
 */
 
 

@@ -3,9 +3,29 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    private $menu = [
+        [
+            "name" => "Home",
+            "route" => "home"
+        ],
+        [
+            "name" => "About",
+            "route" => "about"
+        ],
+        [
+            "name" => "Products",
+            "route" => "products"
+        ],
+        [
+            "name" => "Contact",
+            "route" => "contact"
+        ]
+    ];
     /**
      * Register any application services.
      *
@@ -23,6 +43,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::share('menu', $this->menu);
     }
 }
