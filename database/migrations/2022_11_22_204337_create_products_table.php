@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements("id");
             $table->string("name", 50);
             $table->string("image", 50);
-            $table->string("description", 150);
+            $table->string("description", 300);
             $table->foreignId("brandId")->references("id")->on("brands");
             $table->foreignId("genderId")->references("id")->on("genders");
             $table->boolean("isDeleted")->default(false);
