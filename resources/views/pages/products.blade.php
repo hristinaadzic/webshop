@@ -1,74 +1,64 @@
 @extends("layouts.layout")
 
 @section("content")
-    <section class="main-banner" id="top">
-        <div class="container">
-            <div class="row">
+    <!-- Page Content -->
+    <div class="container mt-4 min-vh-100 mt-5">
 
-                <div class="col-md-3 mr-3">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Category 1
-                            </label>
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Category 2
-                            </label>
-                        </li>
-                    </ul>
-                    <ul class="list-group my-5">
-                        <li class="list-group-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Brand 1
-                            </label>
-                        </li>
-                        <li class="list-group-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Brand 2
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-9 d-flex justify-content-evenly">
-                    <div class="card shadow-lg" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p class="card-text fw-bold ">Category</p>
-                            <p class="card-text fst-italic">Brand</p>
-                            <h4 class="h4 text-bold text-end">45 $</h4>
-                        </div>
-                    </div>
-                    <div class="card shadow-lg" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p class="card-text fw-bold ">Category</p>
-                            <p class="card-text fst-italic">Brand</p>
-                            <h4 class="h4 text-bold text-end">45 $</h4>
-                        </div>
-                    </div>
-                    <div class="card shadow-lg" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p class="card-text fw-bold ">Category</p>
-                            <p class="card-text fst-italic">Brand</p>
-                            <h4 class="h4 text-bold text-end">45 $</h4>
-                        </div>
-                    </div>
-                </div>
+    </br>
+    </br>
+    </br>
+    </br>
+        <hr />
+
+        <div class="row">
+
+            <div class="col-lg-3">
+
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input type="checkbox" name="options" id="opt1" /> Option 1
+                    </li>
+                    <li class="list-group-item">
+                        <input type="checkbox" name="options" id="opt2" /> Option 2
+                    </li>
+                    <li class="list-group-item">
+                        <input type="checkbox" name="options" id="opt3" /> Option 3
+                    </li>
+                </ul>
 
             </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div class="row">
+                    @foreach($products as $product)
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="{{asset('assets/images'.$product->image)}}" alt="{{$product->name}}"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="#">{{$product->name}}</a>
+                                </h4>
+                                <h5>$24.99</h5>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.col-lg-9 -->
+
         </div>
-    </section>
+        <!-- /.row -->
+
+
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
 @endsection

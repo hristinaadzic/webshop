@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Gender;
+use App\Models\Product;
+use App\Models\ProductModel;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -11,8 +16,13 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(){
-        return view("pages.products");
+        $this->data["products"] = Product::where("isDeleted", false)->get();
+        $this->data["genders"] = Gender::get();
+        $this->data["categories"] = Category::where("isDeleted", false)->get();
+        $this->data["brands"] = Brand::get();
+        return view("pages.products", $this->data);
     }
 
     /**
