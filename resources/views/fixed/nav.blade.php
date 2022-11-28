@@ -16,6 +16,14 @@
                                 <a href="{{ route($link["route"]) }}">{{ $link["name"] }}</a>
                             </li>
                         @endforeach
+
+                            @if(session()->has("user"))
+                                <form action="">
+                                    <li><a href="{{route('logout')}}">Logout</a></li>
+                                </form>
+                            @else
+                                <li><a href="{{route('login-form')}}">Login</a></li>
+                            @endif
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>

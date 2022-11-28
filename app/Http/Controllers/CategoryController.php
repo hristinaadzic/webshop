@@ -2,27 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Gender;
-use App\Models\Product;
-use App\Models\ProductModel;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function index(){
-        $this->data["products"] = Product::with('brands', 'categories')->where("isDeleted", false)->get();
-        $this->data["genders"] = Gender::get();
-        $this->data["categories"] = Category::where("isDeleted", false)->get();
-        $this->data["brands"] = Brand::get();
-        return view("pages.products", $this->data);
+    public function index()
+    {
+        //
     }
 
     /**
@@ -43,9 +34,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-//        $name = $request->input('name');
-//        $description = $request->input('desc');
-//        $
+        //
     }
 
     /**
@@ -56,7 +45,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $this->data["product"] = Product::find($id);
+        //
     }
 
     /**
@@ -67,7 +56,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $this->data["product"] = Product::find($id);
+        //
     }
 
     /**
