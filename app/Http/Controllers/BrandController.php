@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -13,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['brands'] = Brand::get();
+        return  view('admin.brands', $this->data);
     }
 
     /**
@@ -23,7 +25,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create-brand');
     }
 
     /**
@@ -34,7 +36,19 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brandName = $request->input('brandName');
+
+        try{
+            \DB::table('brands')->insert([
+                'name' => $brandName
+            ]);
+
+            return redirect()->route('admin-brands')->with('success', 'Brand was added');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('admin-brands')->with('error', 'There was an error processing your request');
+           dd($ex->getMessage());
+        }
     }
 
     /**

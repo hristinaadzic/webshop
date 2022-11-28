@@ -28,3 +28,7 @@ Route::get('/logout', [\App\Http\Controllers\AuthController::class, "logout"])->
 Route::get('/login-form', [\App\Http\Controllers\AuthController::class, "loginForm"])->name('login-form');
 Route::post('/users', [\App\Http\Controllers\UserController::class, 'store'])->name('doRegister');
 Route::get('/users/create', [\App\Http\Controllers\UserController::class, 'create'])->name('register');
+Route::get('/admin/brands', [\App\Http\Controllers\BrandController::class, 'index'])->name('admin-brands');
+Route::get('/brand/create', [\App\Http\Controllers\BrandController::class, 'create'])->name('create-brand');
+Route::get('/brand/{brand}', [\App\Http\Controllers\BrandController::class, 'edit'])->name('brand.edit');
+Route::post('/brand/store', [\App\Http\Controllers\BrandController::class, 'store'])->name('brand.store');

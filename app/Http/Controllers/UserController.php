@@ -51,7 +51,7 @@ class UserController extends Controller
             return redirect()->route('register')->with('success', 'Your registration was succesful');
         }
         catch(\Exception $ex){
-            return redirect()->route('register')->with('error', 'Your registration was succesful');
+            return redirect()->route('register')->with('error', 'There was an error processing your request');
             //dd($ex->getMessage());
         }
     }
