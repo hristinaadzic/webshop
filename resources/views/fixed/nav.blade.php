@@ -18,11 +18,10 @@
                         @endforeach
 
                             @if(session()->has("user"))
-                                <form action="">
-                                    <li><a href="{{route('logout')}}">Logout</a></li>
-                                </form>
+                                <li><a href="{{route('logout')}}">Logout</a></li>
                             @else
                                 <li><a href="{{route('login-form')}}">Login</a></li>
+                                <li><a href="{{route('register')}}">Register</a></li>
                             @endif
                     </ul>
                     <a class='menu-trigger'>

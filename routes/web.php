@@ -26,3 +26,5 @@ Route::get("/contact", [\App\Http\Controllers\ContactController::class, "index"]
 Route::post('/login', [\App\Http\Controllers\AuthController::class, "login"])->name('doLogin');
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, "logout"])->name('logout');
 Route::get('/login-form', [\App\Http\Controllers\AuthController::class, "loginForm"])->name('login-form');
+Route::post('/users', [\App\Http\Controllers\UserController::class, 'store'])->name('doRegister');
+Route::get('/users/create', [\App\Http\Controllers\UserController::class, 'create'])->name('register');

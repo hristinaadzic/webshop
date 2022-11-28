@@ -23,7 +23,7 @@ class AuthController extends Controller
                 $request->session()->put('user', $user);
                 return redirect('home');
             }
-            return redirect();
+            return redirect()->route('login-form')->with('msg', 'Email or password is incorrect');
         }catch (\Exception $ex){
             dd($ex->getMessage());
         }

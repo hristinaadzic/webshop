@@ -19,6 +19,9 @@
                     </div>
                     <button type="submit" class="btn btn-danger mt-3">Log in</button>
                 </form>
+                @if(session()->has('msg'))
+                    <p class="alert alert-danger">{{session()->get('msg')}}</p>
+                @endif
             </div>
         </div>
     </div>

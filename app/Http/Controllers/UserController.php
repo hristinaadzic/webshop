@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.register');
     }
 
     /**
@@ -34,7 +34,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $email = $request->input('email');
+        $password = md5($request->input('password'));
+
+        try{
+            \DB::table('users')->insert([
+                'firstName' => $firstname,
+                'lastName' => $lastname,
+                'email' => $email,
+                'password' => $password,
+                'roleId' => 1
+            ]);
+
+            return redirect()->route('register')->with('success', 'Your registration was succesful');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('register')->with('error', 'Your registration was succesful');
+            //dd($ex->getMessage());
+        }
     }
 
     /**
