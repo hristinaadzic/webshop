@@ -17,11 +17,24 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(){
-        $this->data["products"] = Product::with('brands', 'categories')->where("isDeleted", false)->get();
+    public function index(Request $request){
+        $products = Product::with('brands', 'categories')->where("isDeleted", false);
         $this->data["genders"] = Gender::get();
         $this->data["categories"] = Category::where("isDeleted", false)->get();
         $this->data["brands"] = Brand::get();
+        if($request->has('keyword')){
+            $products = $products->where('products.name', 'like', '%'.$request->get('keyword').'%');
+        }
+
+        if($request->has('brands')){
+            $products->whereIn('products.brandId', $request->get('brands'));
+        }
+
+        if($request->has('categories')){
+            $products->whereRelation('categories', 'categories.id', $request->get('categories'));
+        }
+
+        $this->data["products"] = $products->get();
         return view("pages.products", $this->data);
     }
 
@@ -57,6 +70,7 @@ class ProductsController extends Controller
     public function show($id)
     {
         $this->data["product"] = Product::find($id);
+        return view('pages.product', $this->data);
     }
 
     /**
