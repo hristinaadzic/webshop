@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['categories'] = Category::get();
+        return  view('admin.pages.categories', $this->data);
     }
 
     /**
@@ -34,7 +36,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoryName = $request->input('categoryName');
+
+//        $request->validate([
+//            'name' => 'bail|required|unique:brands'
+//        ]);
+
+        try{
+            \DB::table('brands')->insert([
+                'name' => $categoryName
+            ]);
+
+            return redirect()->route('create-category')->with('success', 'Category was added');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('create-category')->with('error', 'There was an error processing your request');
+            dd($ex->getMessage());
+        }
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['users'] = User::with('roles')->get();
+        return view('admin.pages.users', $this->data);
     }
 
     /**
@@ -38,6 +41,13 @@ class UserController extends Controller
         $lastname = $request->input('lastname');
         $email = $request->input('email');
         $password = md5($request->input('password'));
+
+//        $request->validate([
+//            'firstname' => 'bail|required',
+//            'lastname' => 'bail|required',
+//            'email' => 'bail|required',
+//            'password' => 'bail|required',
+//        ]);
 
         try{
             \DB::table('users')->insert([

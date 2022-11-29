@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
 
     private $firstNames = ["Admin", "Pera", "Mika"];
     private $lastNames = ["Admin", "Peric", "Mikic"];
-    private $emails = ["admin@gmail.com", "pera@gmail.com", "mika@gmail.com"];
+    private $emails = ["admin-assets@gmail.com", "pera@gmail.com", "mika@gmail.com"];
     private $passwords = ["admin123", "pera123", "mika123"];
     private $roleIds = [2, 1, 1];
     public function run()

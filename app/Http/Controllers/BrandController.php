@@ -15,7 +15,7 @@ class BrandController extends Controller
     public function index()
     {
         $this->data['brands'] = Brand::get();
-        return  view('admin.brands', $this->data);
+        return  view('admin.pages.brands', $this->data);
     }
 
     /**
@@ -25,7 +25,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.create-brand');
+        return view('admin.pages.create-brand');
     }
 
     /**
@@ -38,15 +38,19 @@ class BrandController extends Controller
     {
         $brandName = $request->input('brandName');
 
+//        $request->validate([
+//            'name' => 'bail|required|unique:brands'
+//        ]);
+
         try{
             \DB::table('brands')->insert([
                 'name' => $brandName
             ]);
 
-            return redirect()->route('admin-brands')->with('success', 'Brand was added');
+            return redirect()->route('create-brand')->with('success', 'Brand was added');
         }
         catch(\Exception $ex){
-            return redirect()->route('admin-brands')->with('error', 'There was an error processing your request');
+            return redirect()->route('create-brand')->with('error', 'There was an error processing your request');
            dd($ex->getMessage());
         }
     }

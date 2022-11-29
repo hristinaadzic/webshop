@@ -13,7 +13,7 @@ class RoleSeeder extends Seeder
      * @return void
      */
 
-    private $roles = ["user", "admin"];
+    private $roles = ["user", "admin-assets"];
     public function run()
     {
         foreach ($this->roles as $role) {
