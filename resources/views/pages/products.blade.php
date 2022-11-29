@@ -13,17 +13,15 @@
         <div class="row">
             <div class="col-lg-3 mt-3">
                 <form action="{{route('products')}}" method="GET">
-                    <input type="text" class="form-control mb-3" name="keyword" placeholder="Search..."/>
+                    <input type="text" class="form-control mb-3" name="keyword" placeholder="Search..." value="{{request()->keyword ?? ''}}"/>
                     <select class="form-control mb-3" name="sort">
-                        <option value="name-asc">A - Z</option>
-                        <option value="name-desc">A - Z</option>
-                        <option value="priceValue-asc">Price ascending</option>
-                        <option value="priceValue-desc">Price descending</option>
+                        <option value="asc" @if(request()->sort && request()->sort == 'asc') selected @endif>A - Z</option>
+                        <option value="desc" @if(request()->sort && request()->sort == 'desc') selected @endif>Z - A</option>
                     </select>
                     <ul class="list-group">
                         @foreach($categories as $category)
                             <li class="list-group-item">
-                                <input type="checkbox" name="categories[]" id="category{{$category->id}}" value="{{$category->id}}" /> {{$category->name}}
+                                <input type="checkbox" name="categories[]" id="category{{$category->id}}" value="{{$category->id}}" @if(request()->categories && in_array($category->id, request()->categories)) checked @endif/> {{$category->name}}
                             </li>
                         @endforeach
                     </ul>
@@ -31,7 +29,7 @@
                     <ul class="list-group mt-3">
                         @foreach($brands as $brand)
                             <li class="list-group-item">
-                                <input type="checkbox" name="brands[]" id="brand{{$brand->id}}" value="{{$brand->id}}" /> {{$brand->name}}
+                                <input type="checkbox" name="brands[]" id="brand{{$brand->id}}" value="{{$brand->id}}" @if(request()->brands && in_array($brand->id, request()->brands)) checked @endif/> {{$brand->name}}
                             </li>
                         @endforeach
                     </ul>
@@ -75,6 +73,8 @@
                     @endforeach
 
                 </div>
+
+            {{$products->withQueryString()->links('pagination::bootstrap-4')}}
                 <!-- /.row -->
 
             </div>

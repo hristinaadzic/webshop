@@ -22,19 +22,24 @@ class ProductsController extends Controller
         $this->data["genders"] = Gender::get();
         $this->data["categories"] = Category::where("isDeleted", false)->get();
         $this->data["brands"] = Brand::get();
-        if($request->has('keyword')){
+
+        if($request->keyword){
             $products = $products->where('products.name', 'like', '%'.$request->get('keyword').'%');
         }
 
-        if($request->has('brands')){
-            $products->whereIn('products.brandId', $request->get('brands'));
+        if($request->brands){
+            $products->whereIn('products.brandId', $request->brands);
         }
 
-        if($request->has('categories')){
-            $products->whereRelation('categories', 'categories.id', $request->get('categories'));
+        if($request->categories){
+            $products->whereRelation('categories', 'categories.id', $request->categories);
         }
 
-        $this->data["products"] = $products->get();
+        if($request->sort){
+            $products = $products->orderBy('products.name', $request->sort);
+        }
+
+        $this->data["products"] = $products->paginate(3);
         return view("pages.products", $this->data);
     }
 
