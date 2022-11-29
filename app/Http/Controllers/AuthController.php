@@ -17,8 +17,8 @@ class AuthController extends Controller
         $password = md5($request->input("password"));
 
         try{
-            $user = User::where('email', $email)->where('password', $password)->first();
-
+            $user = User::with('roles')->where('email', $email)->where('password', $password)->first();
+            $user->IsAdmin = $user->roles->name == 'admin';
             if($user){
                 $request->session()->put('user', $user);
                 return redirect('home');
