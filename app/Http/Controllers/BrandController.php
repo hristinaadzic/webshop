@@ -38,9 +38,9 @@ class BrandController extends Controller
     {
         $brandName = $request->input('brandName');
 
-//        $request->validate([
-//            'name' => 'bail|required|unique:brands'
-//        ]);
+        $request->validate([
+            'brandName' => 'bail|required|unique:brands,name'
+        ]);
 
         try{
             \DB::table('brands')->insert([

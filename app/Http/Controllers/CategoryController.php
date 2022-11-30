@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return  view('admin.pages.create-category');
     }
 
     /**
@@ -38,9 +38,9 @@ class CategoryController extends Controller
     {
         $categoryName = $request->input('categoryName');
 
-//        $request->validate([
-//            'name' => 'bail|required|unique:brands'
-//        ]);
+        $request->validate([
+            'categoryName' => 'bail|required|unique:categories,name'
+        ]);
 
         try{
             \DB::table('brands')->insert([

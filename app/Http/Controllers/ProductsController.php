@@ -50,7 +50,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.create-product');
     }
 
     /**
@@ -74,6 +74,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
+
         $this->data["product"] = Product::find($id);
         return view('pages.product', $this->data);
     }
