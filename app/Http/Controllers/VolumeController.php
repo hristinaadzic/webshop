@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Volume;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class VolumeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $this->data['categories'] = Category::get();
-        return  view('admin.pages.categories', $this->data);
+        $this->data['volumes'] = Volume::orderBy('volumeInMillilitres')->get();
+        return view('admin.pages.volumes', $this->data);
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return  view('admin.pages.create-category');
+        return view('admin.pages.create-volume');
     }
 
     /**
@@ -36,22 +36,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $categoryName = $request->input('categoryName');
+        $volumeMills = $request->input('volume');
 
         $request->validate([
-            'categoryName' => 'bail|required|unique:categories,name'
+            'volume' => 'bail|required|unique:volumes,volumeInMillilitres'
         ]);
 
         try{
-
-            $category = new Category();
-            $category->name = $categoryName;
-            //dd($category);
-            $category->save();
-
-            return redirect()->route('categories.create')->with('success', 'Category was added');
-        }
-        catch(\Exception $ex){
+            $volume = new Volume();
+            $volume->volumeInMillilitres = $volumeMills;
+            $volume->save();
+            return redirect()->route('categories.create')->with('success', 'Volume was added');
+        }catch(\Exception $ex){
             return redirect()->route('categories.create')->with('error', 'There was an error processing your request');
             dd($ex->getMessage());
         }

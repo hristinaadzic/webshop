@@ -22,6 +22,6 @@ class Product extends Model
     }
 
     public function genders(){
-        return $this->belongsTo(Gender::class);
+        return $this->belongsTo(Gender::class, 'genderId', 'id');
     }
 }

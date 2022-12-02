@@ -16,6 +16,14 @@
                     <i class="typcn typcn-calendar"></i>
                 </a>
             </li>
+            <li class="nav-item nav-date dropdown">
+                <a class="nav-link d-flex justify-content-center align-items-center" href="{{route('home')}}"> Go to home page
+                </a>
+            </li>
+            <li class="nav-item nav-date dropdown">
+                <a class="nav-link d-flex justify-content-center align-items-center" href="{{route('logout')}}"> Logout
+                </a>
+            </li>
 
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -41,7 +49,16 @@
             <a class="nav-link" href="{{route('admin-users')}}">Users</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{route('admin-products')}}">Products</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{route('products.create')}}">Create product</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin-volumes')}}">Volumes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('volumes.create')}}">Create volume</a>
         </li>
     </ul>
 </nav>

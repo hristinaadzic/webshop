@@ -35,8 +35,14 @@ Route::middleware(["isAdmin"])->group(function(){
     Route::get('/categories/create', [\App\Http\Controllers\CategoryController::class, 'create'])->name('categories.create');
     Route::get('/categories/{category}/edit', [\App\Http\Controllers\CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/admin/products', [\App\Http\Controllers\ProductsController::class, 'adminIndex'])->name('admin-products');
     Route::get('/products/create', [\App\Http\Controllers\ProductsController::class, 'create'])->name('products.create');
     Route::post('/products/store', [\App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
+    Route::post('/products/{product}/edit', [\App\Http\Controllers\ProductsController::class, 'edit'])->name('products.edit');
+    Route::get('/admin/volumes', [\App\Http\Controllers\VolumeController::class, 'index'])->name('admin-volumes');
+    Route::get('/volumes/create', [\App\Http\Controllers\VolumeController::class, 'create'])->name('volumes.create');
+    Route::post('/volumes/store', [\App\Http\Controllers\VolumeController::class, 'store'])->name('volumes.store');
+    Route::get('/volumes/{volume}/edit', [\App\Http\Controllers\VolumeController::class, 'edit'])->name('volumes.edit');
 });
 
 Route::middleware(['isLoggedIn'])->group(function(){

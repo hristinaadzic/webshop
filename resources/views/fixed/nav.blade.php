@@ -16,7 +16,6 @@
                                 <a href="{{ route($link["route"]) }}">{{ $link["name"] }}</a>
                             </li>
                         @endforeach
-
                             @if(session()->has("user"))
                                 <li><a href="{{route('logout')}}">Logout</a></li>
                             @else

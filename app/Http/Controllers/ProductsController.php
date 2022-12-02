@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Gender;
 use App\Models\Product;
 use App\Models\ProductModel;
+use App\Models\Volume;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -43,6 +44,15 @@ class ProductsController extends Controller
         return view("pages.products", $this->data);
     }
 
+    public function adminIndex(){
+        $products = Product::with('brands', 'categories', 'genders')->where("isDeleted", false);
+        $this->data["genders"] = Gender::get();
+        $this->data["categories"] = Category::where("isDeleted", false)->get();
+        $this->data["brands"] = Brand::get();
+
+        $this->data["products"] = $products->get();
+        return view("admin.pages.products", $this->data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -50,6 +60,13 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        $products = Product::with('brands', 'categories')->where("isDeleted", false);
+        $this->data["genders"] = Gender::get();
+        $this->data["volumes"] = Volume::get();
+        $this->data["categories"] = Category::where("isDeleted", false)->get();
+        $this->data["brands"] = Brand::get();
+        $this->data["products"] = $products->get();
+        return view('admin.pages.create-product', $this->data);
         return view('admin.pages.create-product');
     }
 
@@ -61,9 +78,39 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-//        $name = $request->input('name');
-//        $description = $request->input('desc');
-//        $
+        $name = $request->input('productName');
+        $description = $request->input('description');
+        $brandId = $request->input('brand');
+        $genderId = $request->input('gender');
+        $categoryIds = $request->input('categories');
+        $volumeIds = $request->input('volumes');
+        $image = $request->file('image');
+        $imageName = time().$image->getClientOriginalName();
+        $image->storeAs("public/assets/images", $imageName);
+
+
+        try{
+            \DB::beginTransaction();
+            $product = new Product();
+            $product->name = $name;
+            $product->description = $description;
+            $product->image = $imageName;
+            $product->brandId = $brandId;
+            $product->genderId = $genderId;
+
+            $product->save();
+            $product->categories()->attach($categoryIds);
+            $product->volumes()->attach($volumeIds);
+            \DB::commit();
+            return redirect()->route('products.create')->with('success', 'Product was added');
+        }
+        catch(\Exception $ex){
+            \DB::rollback();
+            dd($ex->getMessage());
+            return redirect()->route('products.create')->with('error', 'There was an error processing your request');
+
+        }
+
     }
 
     /**
