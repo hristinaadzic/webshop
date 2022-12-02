@@ -23,19 +23,7 @@ Route::get('/login-form', [\App\Http\Controllers\AuthController::class, "loginFo
 //users
 Route::post('/users', [\App\Http\Controllers\UserController::class, 'store'])->name('doRegister');
 Route::get('/users/create', [\App\Http\Controllers\UserController::class, 'create'])->name('register');
-//Route::get('/users/{user}/edit', [\App\Http\Controllers\UserController::class, 'create'])->name('users.edit');
-//Route::get('/admin/users', [\App\Http\Controllers\UserController::class, 'index'])->name('admin-users');
 
-//brands
-//Route::get('/admin/brands', [\App\Http\Controllers\BrandController::class, 'index'])->name('admin-brands');
-//Route::get('/brands/create', [\App\Http\Controllers\BrandController::class, 'create'])->name('brands.create');
-//Route::get('/brands/{brand}/edit', [\App\Http\Controllers\BrandController::class, 'edit'])->name('brands.edit');
-//Route::post('/brands/store', [\App\Http\Controllers\BrandController::class, 'store'])->name('brands.store');
-
-//categories
-//Route::get('/admin-categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('admin-categories');
-//Route::get('/categories/create', [\App\Http\Controllers\CategoryController::class, 'create'])->name('categories.create');
-//Route::get('/categories/{category}/edit', [\App\Http\Controllers\CategoryController::class, 'edit'])->name('categories.edit');
 
 Route::middleware(["isAdmin"])->group(function(){
     Route::get('/admin/brands', [\App\Http\Controllers\BrandController::class, 'index'])->name('admin-brands');

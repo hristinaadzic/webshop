@@ -43,14 +43,15 @@ class BrandController extends Controller
         ]);
 
         try{
-            \DB::table('brands')->insert([
-                'name' => $brandName
-            ]);
 
-            return redirect()->route('create-brand')->with('success', 'Brand was added');
+            $brand = new Brand();
+            $brand->name = $brandName;
+            $brand->save();
+
+            return redirect()->route('brands.create')->with('success', 'Brand was added');
         }
         catch(\Exception $ex){
-            return redirect()->route('create-brand')->with('error', 'There was an error processing your request');
+            return redirect()->route('brands.create')->with('error', 'There was an error processing your request');
            dd($ex->getMessage());
         }
     }

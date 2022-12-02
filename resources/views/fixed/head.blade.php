@@ -15,3 +15,4 @@
 <link rel="stylesheet" href="{{asset('assets/css/templatemo-eduwell-style.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/lightbox.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">

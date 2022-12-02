@@ -43,14 +43,15 @@ class CategoryController extends Controller
         ]);
 
         try{
-            \DB::table('brands')->insert([
-                'name' => $categoryName
-            ]);
 
-            return redirect()->route('create-category')->with('success', 'Category was added');
+            $category = new Category();
+            $category->name = $categoryName;
+            $category->save();
+
+            return redirect()->route('categories.create')->with('success', 'Category was added');
         }
         catch(\Exception $ex){
-            return redirect()->route('create-category')->with('error', 'There was an error processing your request');
+            return redirect()->route('categories.create')->with('error', 'There was an error processing your request');
             dd($ex->getMessage());
         }
     }

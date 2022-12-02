@@ -45,18 +45,19 @@ class UserController extends Controller
 //        $request->validate([
 //            'firstname' => 'bail|required',
 //            'lastname' => 'bail|required',
-//            'email' => 'bail|required',
+//            'email' => 'bail|required|unique:users,email',
 //            'password' => 'bail|required',
 //        ]);
 
         try{
-            \DB::table('users')->insert([
-                'firstName' => $firstname,
-                'lastName' => $lastname,
-                'email' => $email,
-                'password' => $password,
-                'roleId' => 1
-            ]);
+
+            $user = new User();
+            $user->firstname = $firstname;
+            $user->lastname = $lastname;
+            $user->email = $email;
+            $user->password = $password;
+            $user->roleId = 1;
+            $user->save();
 
             return redirect()->route('register')->with('success', 'Your registration was succesful');
         }
