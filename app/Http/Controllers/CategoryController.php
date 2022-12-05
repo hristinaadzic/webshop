@@ -76,7 +76,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->data['category'] = Category::find($id);
+        return view('admin.pages.create-category', $this->data);
     }
 
     /**
@@ -88,7 +89,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $categoryName = $request->input('categoryName');
+
+        $request->validate([
+            'categoryName' => 'bail|required|unique:categories,name'
+        ]);
+
+        try{
+
+            $category = Category::find($id);
+            $category->name = $categoryName;
+            $category->save();
+
+            return redirect()->route('categories.create')->with('success', 'Category was updated');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('categories.create')->with('error', 'There was an error processing your request');
+            dd($ex->getMessage());
+        }
     }
 
     /**

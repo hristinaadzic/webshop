@@ -121,7 +121,6 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-
         $this->data["product"] = Product::find($id);
         return view('pages.product', $this->data);
     }
@@ -134,7 +133,12 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $this->data["product"] = Product::find($id);
+        $this->data["genders"] = Gender::get();
+        $this->data["volumes"] = Volume::get();
+        $this->data["brands"] = Brand::get();
+        $this->data['categories'] = Category::get();
+        $this->data["product"] = Product::with('categories')->find($id);
+        return view('admin.pages.create-product', $this->data);
     }
 
     /**

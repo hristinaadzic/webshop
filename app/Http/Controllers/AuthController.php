@@ -19,11 +19,11 @@ class AuthController extends Controller
         try{
             $user = User::with('roles')->where('email', $email)->where('password', $password)->first();
             $user->IsAdmin = $user->roles->name == 'admin';
-            if($user->isAdmin){
-                return redirect('admin-brands');
-            }
             if($user){
                 $request->session()->put('user', $user);
+                if($user->IsAdmin){
+                    return redirect()->route('admin-brands');
+                }
                 return redirect('home');
             }
             return redirect()->route('login-form')->with('msg', 'Email or password is incorrect');

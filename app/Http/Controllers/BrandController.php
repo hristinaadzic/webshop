@@ -75,7 +75,8 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->data['brand'] = Brand::find($id);
+        return view('admin.pages.create-brand', $this->data);
     }
 
     /**
@@ -87,7 +88,24 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $brandName = $request->input('brandName');
+
+        $request->validate([
+            'brandName' => 'bail|required|unique:brands,name'
+        ]);
+
+        try{
+            $brand = Brand::find($id);
+            $brand->name = $brandName;
+            $brand->save();
+
+            return redirect()->route('brands.create')->with('success', 'Brand was updated');
+        }
+        catch(\Exception $ex){
+            return redirect()->route('brands.create')->with('error', 'There was an error processing your request');
+            dd($ex->getMessage());
+        }
+
     }
 
     /**

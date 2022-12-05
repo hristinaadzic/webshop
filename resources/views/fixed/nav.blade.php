@@ -17,6 +17,9 @@
                             </li>
                         @endforeach
                             @if(session()->has("user"))
+                                @if(session()->get('user')->IsAdmin)
+                                    <li><a href="{{route('admin-brands')}}">Admin panel</a></li>
+                                @endif
                                 <li><a href="{{route('logout')}}">Logout</a></li>
                             @else
                                 <li><a href="{{route('login-form')}}">Login</a></li>
