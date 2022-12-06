@@ -11,6 +11,11 @@
 
                             @php
                             if(isset($product)){
+//                                $prices = [];
+//                                foreach ($product->prices as $p){
+//                                    array_push($prices, $p);
+//                                }
+//                                dd($prices);
                                 $categoryIds = [];
                                 $volumeIds = [];
 
@@ -27,10 +32,10 @@
 
                             <div class="col-md-6 mx-auto">
                                 @if(isset($product))
-                                    <form action="{{route('products.update', ['product'=>$product->id])}}" method="POST">
+                                    <form action="{{route('products.update', ['product'=>$product->id])}}" method="POST" enctype="multipart/form-data">
                                         @method("PUT")
                                 @else
-                                    <form action="{{route('products.store')}}" method="POST">
+                                    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                                 @endif
                                 @csrf
                                     <div class="form-group">
@@ -75,7 +80,10 @@
                                     </ul>
                                     <div class="form-group">
                                         <label for="image">Image</label>
-                                        <input type="file" name="image" class="form-control"/>
+                                        @if(isset($product))
+                                            <img src="{{asset('assets/images/'.$product->image)}}" class="card-img-top"/>
+                                        @endif
+                                        <input type="file" name="image" class="form-control" @if(isset($product)) value="{{($product->image)}}" @endif/>
                                     </div>
                                     <button type="submit" class="btn btn-danger my-3">Add</button>
                                 </form>

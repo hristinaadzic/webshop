@@ -109,6 +109,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $user = User::find($id);
+
+            if(!$user->isDeleted){
+                $user->isDeleted = true;
+            }
+            else{
+                $user->isDeleted = false;
+            }
+
+            $user->save();
+            return redirect()->route('admin-users')->with('success', 'User status was changed');
+        }catch(\Exception $ex){
+            dd($ex->getMessage());
+            return redirect()->route('admin-users')->with('error', 'There was an error processing your request');
+
+        }
     }
 }

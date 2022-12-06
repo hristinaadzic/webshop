@@ -5,6 +5,9 @@
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">
+                @if(session()->has('success'))
+                    <p class="alert alert-success mt-3">{{session()->get('success')}}</p>
+                @endif
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body d-flex justify-content-center">
@@ -20,6 +23,7 @@
                                     <th  scope="col">Brands</th>
                                     <th  scope="col">Categories</th>
                                     <th  scope="col">Volumes</th>
+                                    <th  scope="col">Status</th>
                                     <th  scope="col">Delete</th>
                                     <th  scope="col">Edit</th>
                                 </tr>
@@ -46,9 +50,13 @@
                                                 {{$vol->volumeInMillilitres}} ml
                                             @endforeach
                                         </td>
+                                        <td>@if(!$product->isDeleted) Active
+                                            @else Deactivated
+                                            @endif</td>
                                         <th scope="col">
-                                            <form>
-                                                <input type="submit" class="btn btn-danger" name="deleteProduct" value="Delete"/>
+                                            <form action="{{route('products.destroy', ['product'=>$product->id])}}" method="POST">
+                                                @csrf
+                                                <input type="submit" class="btn btn-danger" name="deleteProduct" value="Change status"/>
                                             </form>
                                         </th>
                                         <th scope="col"><a href="{{route('products.edit', ['product'=>$product->id])}}" class="btn btn-warning">Edit</a></th>

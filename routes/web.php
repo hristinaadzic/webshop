@@ -40,12 +40,16 @@ Route::middleware(["isAdmin"])->group(function(){
     Route::get('/admin/products', [\App\Http\Controllers\ProductsController::class, 'adminIndex'])->name('admin-products');
     Route::get('/products/create', [\App\Http\Controllers\ProductsController::class, 'create'])->name('products.create');
     Route::post('/products/store', [\App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
-    Route::put('/products/{product}', [\App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
     Route::get('/products/{product}/edit', [\App\Http\Controllers\ProductsController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [\App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
+    Route::post('/products/{product}', [\App\Http\Controllers\ProductsController::class, 'destroy'])->name('products.destroy');
     Route::get('/admin/volumes', [\App\Http\Controllers\VolumeController::class, 'index'])->name('admin-volumes');
     Route::get('/volumes/create', [\App\Http\Controllers\VolumeController::class, 'create'])->name('volumes.create');
     Route::post('/volumes/store', [\App\Http\Controllers\VolumeController::class, 'store'])->name('volumes.store');
     Route::get('/volumes/{volume}/edit', [\App\Http\Controllers\VolumeController::class, 'edit'])->name('volumes.edit');
+    Route::put('/volumes/{volume}', [\App\Http\Controllers\VolumeController::class, 'update'])->name('volumes.update');
+    Route::post('/volumes/{volume}', [\App\Http\Controllers\VolumeController::class, 'destroy'])->name('volumes.destroy');
+    Route::post('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
 });
 
 Route::middleware(['isLoggedIn'])->group(function(){

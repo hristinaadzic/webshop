@@ -45,7 +45,7 @@ class ProductsController extends Controller
     }
 
     public function adminIndex(){
-        $products = Product::with('brands', 'categories', 'genders')->where("isDeleted", false);
+        $products = Product::with('brands', 'categories', 'genders');
         $this->data["genders"] = Gender::get();
         $this->data["categories"] = Category::where("isDeleted", false)->get();
         $this->data["brands"] = Brand::get();
@@ -60,7 +60,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $products = Product::with('brands', 'categories')->where("isDeleted", false);
+        $products = Product::with('brands', 'categories');
         $this->data["genders"] = Gender::get();
         $this->data["volumes"] = Volume::get();
         $this->data["categories"] = Category::where("isDeleted", false)->get();
@@ -86,7 +86,7 @@ class ProductsController extends Controller
         $volumeIds = $request->input('volumes');
         $image = $request->file('image');
         $imageName = time().$image->getClientOriginalName();
-        $image->storeAs("public/assets/images", $imageName);
+        $request->image->move(public_path('/assets/images'), $imageName);
 
 
         try{
@@ -150,7 +150,47 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->input('productName');
+        $description = $request->input('description');
+        $brandId = $request->input('brand');
+        $genderId = $request->input('gender');
+        $categoryIds = $request->input('categories');
+        $volumeIds = $request->input('volumes');
+        $image = $request->file('image');
+
+
+        try{
+            \DB::beginTransaction();
+            $product = Product::find($id);
+            $product->name = $name;
+            $product->description = $description;
+            $product->brandId = $brandId;
+            $product->genderId = $genderId;
+
+            if(isset($image)){
+                $imageName = time().$image->getClientOriginalName();
+                $request->image->move(public_path('/assets/images'), $imageName);
+            }
+            else{
+                $imageName = $product->image;
+            }
+
+            $product->image = $imageName;
+            $product->save();
+            $product->categories()->sync($categoryIds);
+            $product->volumes()->sync($volumeIds);
+            foreach ($product->prices as $price){
+                $product->volumes()->sync($price);
+            }
+            \DB::commit();
+            return redirect()->route('products.create')->with('success', 'Product was updated');
+        }
+        catch(\Exception $ex){
+            \DB::rollback();
+            dd($ex->getMessage());
+            return redirect()->route('products.create')->with('error', 'There was an error processing your request');
+
+        }
     }
 
     /**
@@ -161,6 +201,22 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $product = Product::find($id);
+
+            if(!$product->isDeleted){
+                $product->isDeleted = true;
+            }
+            else{
+                $product->isDeleted = false;
+            }
+
+            $product->save();
+            return redirect()->route('admin-products')->with('success', 'Product status was changed');
+        }catch(\Exception $ex){
+            dd($ex->getMessage());
+            return redirect()->route('admin-products')->with('error', 'There was an error processing your request');
+
+        }
     }
 }

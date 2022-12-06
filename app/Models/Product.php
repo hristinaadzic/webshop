@@ -24,4 +24,8 @@ class Product extends Model
     public function genders(){
         return $this->belongsTo(Gender::class, 'genderId', 'id');
     }
+
+    public function prices(){
+        return $this->hasManyThrough(Price::class, ProductVolume::class, 'productId', 'productVolumeId', 'id', 'id');
+    }
 }

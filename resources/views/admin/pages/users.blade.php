@@ -5,6 +5,9 @@
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">
+                @if(session()->has('success'))
+                    <p class="alert alert-success mt-3">{{session()->get('success')}}</p>
+                @endif
                 <div class="col-lg-10 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body d-flex justify-content-center">
@@ -17,6 +20,7 @@
                                     <th  scope="col">Last name</th>
                                     <th  scope="col">Email</th>
                                     <th  scope="col">Role</th>
+                                    <th  scope="col">Status</th>
                                     <th  scope="col">Delete</th>
                                     <th  scope="col">Edit</th>
                                 </tr>
@@ -32,9 +36,13 @@
                                         <td>{{$user->lastName}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->roles->name}}</td>
+                                        <td>@if(!$user->isDeleted) Active
+                                            @else Deactivated
+                                            @endif</td>
                                         <td>
-                                            <form>
-                                                <input type="submit" class="btn btn-danger" name="deleteUser" value="Delete"/>
+                                            <form action="{{route('users.destroy', ['user'=>$user->id])}}" method="POST">
+                                                @csrf
+                                                <input type="submit" class="btn btn-danger" name="deleteUser" value="Change status"/>
                                             </form>
                                         </td>
                                         <th scope="col"><a href="{{route('users.edit', ['user'=>$user->id])}}" class="btn btn-warning">Edit</a></th>
