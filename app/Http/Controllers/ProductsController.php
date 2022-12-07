@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Gender;
@@ -22,7 +23,7 @@ class ProductsController extends Controller
         $products = Product::with('brands', 'categories')->where("isDeleted", false);
         $this->data["genders"] = Gender::get();
         $this->data["categories"] = Category::where("isDeleted", false)->get();
-        $this->data["brands"] = Brand::get();
+        $this->data["brands"] = Brand::where("isDeleted", false)->get();
 
         if($request->keyword){
             $products = $products->where('products.name', 'like', '%'.$request->get('keyword').'%');
@@ -85,9 +86,19 @@ class ProductsController extends Controller
         $categoryIds = $request->input('categories');
         $volumeIds = $request->input('volumes');
         $image = $request->file('image');
+
+        $request->validate([
+            'productName' => 'bail|required|max:50',
+            'description' => 'bail|required|max:300',
+            'brand' => 'bail|required|exists:brands,id',
+            'gender' => 'bail|required|exists:genders,id',
+            'categories' => 'bail|required|exists:categories,id',
+            'volumes' => 'bail|required|exists:volumes,id',
+            'image' => 'bail|required|image'
+        ]);
+
         $imageName = time().$image->getClientOriginalName();
         $request->image->move(public_path('/assets/images'), $imageName);
-
 
         try{
             \DB::beginTransaction();
@@ -105,8 +116,8 @@ class ProductsController extends Controller
             return redirect()->route('products.create')->with('success', 'Product was added');
         }
         catch(\Exception $ex){
-            \DB::rollback();
             dd($ex->getMessage());
+            \DB::rollback();
             return redirect()->route('products.create')->with('error', 'There was an error processing your request');
 
         }

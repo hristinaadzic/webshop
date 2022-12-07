@@ -117,6 +117,22 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $category = Category::find($id);
+
+            if(!$category->isDeleted){
+                $category->isDeleted = true;
+            }
+            else{
+                $category->isDeleted = false;
+            }
+
+            $category->save();
+            return redirect()->route('admin-categories')->with('success', 'Category status was changed');
+        }catch(\Exception $ex){
+            dd($ex->getMessage());
+            return redirect()->route('admin-categories')->with('error', 'There was an error processing your request');
+
+        }
     }
 }

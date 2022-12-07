@@ -9,7 +9,4 @@ class Price extends Model
 {
     use HasFactory;
 
-//    public function products(){
-//        return $this->hasManyThrough(Product::class, 'product_volumes', 'productVolumeId', 'productId', 'id');
-//    }
 }

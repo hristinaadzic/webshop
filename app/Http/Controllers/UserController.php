@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,19 +36,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $email = $request->input('email');
         $password = md5($request->input('password'));
-
-//        $request->validate([
-//            'firstname' => 'bail|required',
-//            'lastname' => 'bail|required',
-//            'email' => 'bail|required|unique:users,email',
-//            'password' => 'bail|required',
-//        ]);
 
         try{
 

@@ -32,11 +32,13 @@ Route::middleware(["isAdmin"])->group(function(){
     Route::get('/brands/{brand}/edit', [\App\Http\Controllers\BrandController::class, 'edit'])->name('brands.edit');
     Route::post('/brands/store', [\App\Http\Controllers\BrandController::class, 'store'])->name('brands.store');
     Route::put('/brands/{brand}', [\App\Http\Controllers\BrandController::class, 'update'])->name('brands.update');
+    Route::patch('/brands/{brand}', [\App\Http\Controllers\BrandController::class, 'destroy'])->name('brands.destroy');
     Route::get('/admin-categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('admin-categories');
     Route::get('/categories/create', [\App\Http\Controllers\CategoryController::class, 'create'])->name('categories.create');
     Route::get('/categories/{category}/edit', [\App\Http\Controllers\CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
     Route::put('/categories/{category}', [\App\Http\Controllers\CategoryController::class, 'update'])->name('categories.update');
+    Route::patch('/categories/{category}', [\App\Http\Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('/admin/products', [\App\Http\Controllers\ProductsController::class, 'adminIndex'])->name('admin-products');
     Route::get('/products/create', [\App\Http\Controllers\ProductsController::class, 'create'])->name('products.create');
     Route::post('/products/store', [\App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
@@ -50,6 +52,10 @@ Route::middleware(["isAdmin"])->group(function(){
     Route::put('/volumes/{volume}', [\App\Http\Controllers\VolumeController::class, 'update'])->name('volumes.update');
     Route::post('/volumes/{volume}', [\App\Http\Controllers\VolumeController::class, 'destroy'])->name('volumes.destroy');
     Route::post('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/admin/prices', [\App\Http\Controllers\PriceController::class, 'index'])->name('admin-prices');
+    Route::get('/prices/create', [\App\Http\Controllers\PriceController::class, 'create'])->name('prices.create');
+    Route::post('/prices/store', [\App\Http\Controllers\PriceController::class, 'store'])->name('prices.store');
+    Route::get('/admin/orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('admin-orders');
 });
 
 Route::middleware(['isLoggedIn'])->group(function(){

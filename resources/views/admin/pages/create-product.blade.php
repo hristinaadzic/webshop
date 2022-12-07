@@ -40,62 +40,74 @@
                                 @csrf
                                     <div class="form-group">
                                         <label for="productName">Product name</label>
-                                        <input type="text" name="productName" class="form-control" @if(isset($product)) ? value="{{$product->name}}" : value="" @endif/>
+                                        <input type="text" name="productName" class="form-control @error('productName') is-invalid @enderror" @if(isset($product)) ? value="{{$product->name}}" : value="" @endif/>
                                     </div>
+                                        @error('productName')
+                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        @enderror
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <textarea type="text" name="description" rows="6" class="form-control">@if(isset($product)) {{($product->description)}} @endif</textarea>
+                                        <textarea type="text" name="description" rows="6" class="form-control @error('description') is-invalid @enderror">@if(isset($product)) {{($product->description)}} @endif</textarea>
                                     </div>
+                                        @error('description')
+                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        @enderror
                                     <div class="form-group my-3">
                                         <label for="brand">Brand</label>
-                                        <select class="form-control" name="brand">
+                                        <select class="form-control @error('brand') is-invalid @enderror" name="brand">
                                             @foreach($brands as $brand)
                                                 <option value="{{$brand->id}}" @if(isset($product) && $product->brandId == $brand->id) selected @endif> {{$brand->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                        @error('brand')
+                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        @enderror
                                     <ul class="list-group">
                                         <label for="gender">Gender</label>
                                         @foreach($genders as $gender)
-                                            <li class="list-group-item">
+                                            <li class="list-group-item @error('gender') is-invalid @enderror">
                                                 <input type="radio" name="gender"  value="{{$gender->id}}" @if(isset($product) && $product->genderId == $gender->id) checked @elseif(!isset($product) && $gender->id == 1) checked @endif/> {{$gender->name}}
                                             </li>
                                         @endforeach
                                     </ul>
+                                        @error('gender')
+                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        @enderror
                                     <ul class="list-group my-3">
-                                        <label for="brand">Categories</label>
+                                        <label for="categories">Categories</label>
                                         @foreach($categories as $cat)
-                                            <li class="list-group-item">
+                                            <li class="list-group-item @error('categories') is-invalid @enderror">
                                                 <input type="checkbox" name="categories[]" id="category{{$cat->id}}" value="{{$cat->id}}" @if(isset($product) && in_array($cat->id, $categoryIds)) checked @endif/> {{$cat->name}}
                                             </li>
                                         @endforeach
                                     </ul>
+                                        @error('categories')
+                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        @enderror
                                     <ul class="list-group my-3">
-                                        <label for="brand">Volumes</label>
+                                        <label for="volumes">Volumes</label>
                                         @foreach($volumes as $vol)
                                             <li class="list-group-item">
                                                 <input type="checkbox" name="volumes[]" id="volume{{$vol->id}}" value="{{$vol->id}}" @if(isset($product) && in_array($vol->id, $volumeIds)) checked @endif/> {{$vol->volumeInMillilitres}} ml
                                             </li>
                                         @endforeach
                                     </ul>
+                                        @error('volumes')
+                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        @enderror
                                     <div class="form-group">
                                         <label for="image">Image</label>
                                         @if(isset($product))
-                                            <img src="{{asset('assets/images/'.$product->image)}}" class="card-img-top"/>
+                                            <img src="{{asset('assets/images/'.$product->image)}}" class="card-img-top @error('image') is-invalid @enderror"/>
                                         @endif
                                         <input type="file" name="image" class="form-control" @if(isset($product)) value="{{($product->image)}}" @endif/>
                                     </div>
+                                        @error('image')
+                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                        @enderror
                                     <button type="submit" class="btn btn-danger my-3">Add</button>
                                 </form>
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 @if(session()->has('success'))
                                     <p class="alert alert-success">{{session()->get('success')}}</p>
                                 @endif

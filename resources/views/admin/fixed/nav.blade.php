@@ -60,5 +60,14 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('volumes.create')}}">Create volume</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('prices.create')}}">Create price</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin-prices')}}">Prices</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin-orders')}}">Orders</a>
+        </li>
     </ul>
 </nav>

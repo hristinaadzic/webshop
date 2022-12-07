@@ -116,6 +116,22 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $brand = Brand::find($id);
+
+            if(!$brand->isDeleted){
+                $brand->isDeleted = true;
+            }
+            else{
+                $brand->isDeleted = false;
+            }
+
+            $brand->save();
+            return redirect()->route('admin-brands')->with('success', 'Brand status was changed');
+        }catch(\Exception $ex){
+            dd($ex->getMessage());
+            return redirect()->route('admin-brands')->with('error', 'There was an error processing your request');
+
+        }
     }
 }
