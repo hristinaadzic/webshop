@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Price;
+use App\Models\Product;
+use App\Models\Volume;
 use Illuminate\Http\Request;
 
 class PriceController extends Controller
@@ -13,7 +16,8 @@ class PriceController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['products'] = Product::with('prices')->get();
+        return view('admin.pages.prices', $this->data);
     }
 
     /**
@@ -21,9 +25,14 @@ class PriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $id = $request->id;
+        $this->data['product'] = Product::find($id);
+        $this->data['products'] = Product::with('volumes')->get();
+        $this->data['volumes'] = Volume::with( 'product_volumes')->where('product_volumes.productId', $id)->get();
+        //dd($this->data['volumes']);
+        return view('admin.pages.create-price', $this->data);
     }
 
     /**

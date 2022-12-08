@@ -11,11 +11,11 @@
 
                             @php
                             if(isset($product)){
-//                                $prices = [];
-//                                foreach ($product->prices as $p){
-//                                    array_push($prices, $p);
-//                                }
-//                                dd($prices);
+                                $prices = [];
+                                foreach ($product->prices as $p){
+                                    array_push($prices, $p);
+                                }
+                                //dd($prices);
                                 $categoryIds = [];
                                 $volumeIds = [];
 
@@ -85,14 +85,14 @@
                                         @error('categories')
                                         <div class="alert alert-danger mt-2">{{ $message }}</div>
                                         @enderror
-                                    <ul class="list-group my-3">
-                                        <label for="volumes">Volumes</label>
-                                        @foreach($volumes as $vol)
-                                            <li class="list-group-item">
-                                                <input type="checkbox" name="volumes[]" id="volume{{$vol->id}}" value="{{$vol->id}}" @if(isset($product) && in_array($vol->id, $volumeIds)) checked @endif/> {{$vol->volumeInMillilitres}} ml
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                        <ul class="list-group my-3">
+                                            <label for="volumes">Volumes</label>
+                                            @foreach($volumes as $vol)
+                                                <li class="list-group-item">
+                                                    <input type="checkbox" name="volumes[]" id="volume{{$vol->id}}" value="{{$vol->id}}" @if(isset($product) && in_array($vol->id, $volumeIds)) checked @endif/> {{$vol->volumeInMillilitres}} ml
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                         @error('volumes')
                                         <div class="alert alert-danger mt-2">{{ $message }}</div>
                                         @enderror

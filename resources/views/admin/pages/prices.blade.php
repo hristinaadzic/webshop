@@ -11,9 +11,6 @@
                     <div class="card">
                         <div class="card-body d-flex justify-content-center">
 
-                            @if(count($prices) == 0)
-                                <p class="alert alert-danger">There is no orders</p>
-                            @else
                                 <table class=" table-hover table col-lg-10">
                                     <thead>
                                     <tr class="table-danger">
@@ -28,17 +25,25 @@
                                     @php
                                         $counter = 1;
                                     @endphp
-                                    @foreach($prices as $price)
+                                    @foreach($products as $product)
                                         <tr>
                                             <th scope="row">{{$counter++}}</th>
-                                            <td>{{$price->products()->name}}</td>
-                                            <td>{{$price->volumes()->volumeInMillilitres}}</td>
+                                            <td>{{$product->name}}</td>
+                                            <td>
+                                                @foreach($product->volumes as $vol)
+                                                    {{$vol->volumeInMillilitres}} ml<br/>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach($product->prices as $p)
+                                                    {{$p->priceValue}} $<br/>
+                                                @endforeach
+                                            </td>
                                             <th scope="col"><a href="{{route('prices.create')}}" class="btn btn-success">Add</a></th>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                            @endif
 
                         </div>
                     </div>

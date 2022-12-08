@@ -1,6 +1,7 @@
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->
-<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+{{--<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <script src="{{asset('assets/js/isotope.min.js')}}"></script>
@@ -55,4 +56,6 @@
     $(window).scroll(function () {
         checkSection();
     });
+
+
 </script>
