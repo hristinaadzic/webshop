@@ -34,27 +34,24 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="volume">Volume</label>
-{{--                                        <select class="form-control" name="volume">--}}
-{{--                                            @foreach($products->volume as $volume)--}}
+                                        <select class="form-control @error('volume') is-invalid @enderror" name="volume" id="volume">
+{{--                                            @foreach($volumes as $volume)--}}
 {{--                                                <option value="{{$volume->id}}">{{$volume->volumeInMillilitres}}</option>--}}
 {{--                                            @endforeach--}}
-{{--                                        </select>--}}
+                                        </select>
                                     </div>
+                                    @error('volume')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                    @enderror
                                     <div class="form-group">
                                         <label for="price">Price</label>
-                                        <input type="text" name="price" class="form-control"/>
+                                        <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"/>
                                     </div>
+                                    @error('price')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                    @enderror
                                     <button type="submit" class="btn btn-danger my-3">Add</button>
                                 </form>
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 @if(session()->has('success'))
                                     <p class="alert alert-success">{{session()->get('success')}}</p>
                                  @endif

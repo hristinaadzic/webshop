@@ -116,7 +116,7 @@ class ProductsController extends Controller
             return redirect()->route('products.create')->with('success', 'Product was added');
         }
         catch(\Exception $ex){
-            dd($ex->getMessage());
+            //dd($ex->getMessage());
             \DB::rollback();
             return redirect()->route('products.create')->with('error', 'There was an error processing your request');
 

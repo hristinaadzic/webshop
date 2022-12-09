@@ -21,6 +21,7 @@ class AuthController extends Controller
             $user->IsAdmin = $user->roles->name == 'admin';
             if($user){
                 $request->session()->put('user', $user);
+                $request->session()->put('cartItems', []);
                 if($user->IsAdmin){
                     return redirect()->route('admin-brands');
                 }

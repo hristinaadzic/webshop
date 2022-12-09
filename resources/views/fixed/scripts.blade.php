@@ -57,5 +57,25 @@
         checkSection();
     });
 
+    var token = '{{csrf_token()}}'
+
+    function addToCart(id){
+        $.ajax({
+            url: "/addtocart/" + id,
+            method:'POST',
+            data:{
+                _token: token,
+            },
+            headers:{
+                'Accept':'application/json'
+            },
+            success: function (data){
+                alert('Added to cart');
+            },
+            error: function (err){
+                console.log(err)
+            }
+        })
+    }
 
 </script>

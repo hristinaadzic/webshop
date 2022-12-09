@@ -21,13 +21,22 @@
             method: 'GET',
             data: {id:id},
             success: function (res){
-                console.log('success')
+                displayVolumes(res)
+                console.log(res);
             },
             error: function (err){
                 console.log(err)
             }
         })
     })
+
+    function displayVolumes(data){
+        let html = "";
+        data.forEach(el => {
+            html += `<option value="${el.id}">${el.volumeInMillilitres}</option>`;
+        });
+        $('#volume').html(html)
+    }
 </script>
 <!-- endinject -->
 <!-- Custom js for this page-->

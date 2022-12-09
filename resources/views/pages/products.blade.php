@@ -67,6 +67,7 @@
                                         {{$vol->volumeInMillilitres}}
                                     @endforeach
                                 ml</p>
+                                <button type="button" onclick="addToCart({{$product->id}})" class="btn-sm btn-danger mt-2">Add to cart</button>
                             </div>
                         </div>
                     </div>

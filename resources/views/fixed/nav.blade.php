@@ -21,6 +21,7 @@
                                     <li><a href="{{route('admin-brands')}}">Admin panel</a></li>
                                 @endif
                                 <li><a href="{{route('logout')}}">Logout</a></li>
+                                <li><a href="{{route('cart')}}">Cart</a></li>
                             @else
                                 <li><a href="{{route('login-form')}}">Login</a></li>
                                 <li><a href="{{route('register')}}">Register</a></li>

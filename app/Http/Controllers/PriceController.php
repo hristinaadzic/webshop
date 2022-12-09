@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Price;
 use App\Models\Product;
 use App\Models\Volume;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PriceController extends Controller
 {
@@ -29,10 +31,16 @@ class PriceController extends Controller
     {
         $id = $request->id;
         $this->data['product'] = Product::find($id);
-        $this->data['products'] = Product::with('volumes')->get();
-        $this->data['volumes'] = Volume::with( 'product_volumes')->where('product_volumes.productId', $id)->get();
-        //dd($this->data['volumes']);
-        return view('admin.pages.create-price', $this->data);
+        $products= Product::with('volumes')->get();
+        $volumes = Volume::join('product_volumes', 'volumes.id', '=', 'product_volumes.volumeId')
+            ->where('product_volumes.productId', $id)->get();
+        $this->data['products'] = $products;
+
+        if($request->ajax()){
+            return response()->json($volumes);
+        }
+        return view('admin.pages.create-price',$this->data);
+
     }
 
     /**
@@ -43,7 +51,26 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $volumeId = $request->input('volume');
+        $pricevalue = $request->input('price');
+
+        $request->validate([
+            'volume'=> 'required',
+            'price'=> 'required'
+        ]);
+
+        try{
+            $price = new Price();
+            $price->productVolumeId = $volumeId;
+            $price->priceValue = $pricevalue;
+            $price->save();
+            return redirect()->route('prices.create')->with('success', 'Price was added for selected product');
+        }
+        catch(\Exception $ex){
+           //dd($ex->getMessage());
+            return redirect()->route('prices.create')->with('error', 'There was an error processing your request');
+
+        }
     }
 
     /**
