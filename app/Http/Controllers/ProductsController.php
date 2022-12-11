@@ -132,7 +132,11 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $this->data["product"] = Product::find($id);
+        //$this->data["product"] = Product::join('product_volumes', 'products.id', '=', 'product_volumes.productId')->select('products.id', 'products.name', 'product_volumes.id', 'products.')->find($id);
+        $this->data["product"] = Product::with('volumes', 'brands', 'categories')->find($id);
+        $volumes = Volume::join('product_volumes', 'volumes.id', '=', 'product_volumes.volumeId')
+            ->where('product_volumes.productId', $id)->get();
+        $this->data['volumes'] = $volumes;
         return view('pages.product', $this->data);
     }
 

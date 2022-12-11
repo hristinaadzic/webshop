@@ -59,28 +59,49 @@
 
     var token = '{{csrf_token()}}'
 
-    function addToCart(id){
-        $.ajax({
-            url: "/addtocart/" + id,
-            method:'POST',
-            data:{
-                _token: token,
-            },
-            headers:{
-                'Accept':'application/json'
-            },
-            success: function (data){
-                alert('Added to cart');
-            },
-            error: function (err){
-                console.log(err)
-            }
-        })
-    }
+    // function addToCart(id){
+    //     $.ajax({
+    //         url: "/addtocart/" + id,
+    //         method:'POST',
+    //         data:{
+    //             _token: token,
+    //         },
+    //         headers:{
+    //             'Accept':'application/json'
+    //         },
+    //         success: function (data){
+    //             alert('Added to cart');
+    //         },
+    //         error: function (err){
+    //             console.log(err)
+    //         }
+    //     })
+    // }
 
-    function isVolumeSelected(){
-        
-    }
+    // $('.volumes').change(isVolumeSelected)
+    //
+    // function isVolumeSelected(){
+    //     console.log('cao')
+    //
+    //     let volumesSelected = [];
+    //     if(volumesSelected.length != 0){
+    //     $('.volumes:checked').each(function (el) {
+    //         volumesSelected.push(parseInt($(this).val()));
+    //     })
+    //         $('.cart-btn').removeAttr('disabled')
+    //     }
+    //     else {
+    //         volumesSelected = [];
+    //         $('cart-btn').attr("disabled")
+    //     }
+
+
+
+
+
+
+
+
 
 
 </script>

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('order_lines', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->foreignId('orderId')->references("id")->on("orders");
-            $table->foreignId('productVolumeId')->references("id")->on("product_volumes");
             $table->string("productName");
             $table->integer("quantity");
             $table->decimal("price");

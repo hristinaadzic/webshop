@@ -60,7 +60,8 @@ Route::middleware(["isAdmin"])->group(function(){
 
 Route::middleware(['isLoggedIn'])->group(function(){
     Route::get('/users/{user}/edit', [\App\Http\Controllers\UserController::class, 'create'])->name('users.edit');
-    Route::post('/addtocart/{productId}', [\App\Http\Controllers\CartController::class, 'addToCart']);
+    Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'addToCart'])->name('addtocart');
+    Route::post('order',[\App\Http\Controllers\OrdersController::class, 'store'])->name('order');
 });
 
 //base routes
@@ -71,4 +72,4 @@ Route::get("/products", [\App\Http\Controllers\ProductsController::class, "index
 Route::get("/products/{product}", [\App\Http\Controllers\ProductsController::class, "show"])->name("products.show");
 Route::get("/contact", [\App\Http\Controllers\ContactController::class, "index"])->name("contact");
 Route::post("/contact/store", [\App\Http\Controllers\ContactController::class, "store"])->name("contact.store");
-Route::get('cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');
+Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart');

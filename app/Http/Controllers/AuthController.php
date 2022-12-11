@@ -18,7 +18,7 @@ class AuthController extends Controller
 
         $request->validate([
             'email' => 'bail|required|regex:/^[\w\.\-]+\@([a-z0-9]+\.)+[a-z]{2,3}$/',
-            'password' => 'bail|required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'
+            'password' => 'bail|required'
         ]);
 
         try{

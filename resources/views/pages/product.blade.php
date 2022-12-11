@@ -7,7 +7,11 @@
                     <img src="{{asset('assets/images/'.$product->image)}}"/>
                 </div>
             </div>
+
             <div class="col-md-7">
+                <form action="{{route('addtocart')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="productId" value="{{$product->id}}">
                 <h4>{{$product->name}}</h4><hr/>
                 <p>{{$product->description}}</p><hr/>
                 <p class="fw-bolder">Brand: {{$product->brands->name}}</p><hr/>
@@ -18,17 +22,26 @@
                 </p>
                 <p> Sizes available:
                 <ul class="list-group">
-                    @foreach($product->volumes as $volume)
+                    @php
+                    //dd($product->volumes)
+                    @endphp
+                    @foreach($volumes as $index => $volume)
                         <li class="list-group-item">
-                            <input type="checkbox" name="categories[]" id="volume{{$volume->id}}" value="{{$volume->id}}"/> {{$volume->volumeInMillilitres}} ml
+                            <input type="radio" class="volumes" name="volumes"  id="volume{{$volume->id}}" value="{{$volume->id}}" @if($index == 0) checked  @endif/> {{$volume->volumeInMillilitres}} ml
                         </li>
                     @endforeach
                 </ul>
                 </p>
                 @if(session()->has('user'))
-                    <button type="button" onclick="addToCart({{$product->id}})" class="btn btn-danger mt-3 cart-btn">Add To Cart</button>
+                    <button type="submit" class="btn btn-danger mt-3 cart-btn">Add To Cart</button>
+
                 @endif
+                    @if(session()->has('success'))
+                        <p class="alert alert-success">{{session()->get('success')}}</p>
+                    @endif
+            </form>
             </div>
+        </div>
         </div>
     </div>
 @endsection
