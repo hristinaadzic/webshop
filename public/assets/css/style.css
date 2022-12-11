@@ -13,3 +13,10 @@
     border-color: #dc3545 !important;
     color: #fff !important;
 }
+
+.pink{
+    background:#dc8cdb !important;
+}
+.pink a{
+    color: #fff !important;
+}

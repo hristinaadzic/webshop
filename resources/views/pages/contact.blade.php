@@ -32,36 +32,56 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <form id="contact" action="" method="post">
+                    <form id="contact" action="{{route('contact.store')}}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="section-heading">
                                     <h6>Contact us</h6>
                                     <h4>Say <em>Hello</em></h4>
-                                    <p>IF you need a working contact form by PHP script, please visit TemplateMo's contact page for more info.</p>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <fieldset>
-                                    <input type="name" name="name" id="name" placeholder="Full Name" autocomplete="on" required>
+                                    <input type="name" name="firstname" id="firstname" placeholder="First Name" class="@error('firstname') is-invalid @enderror">
                                 </fieldset>
                             </div>
+                            @error('firstname')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
                             <div class="col-lg-12">
                                 <fieldset>
-                                    <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
+                                    <input type="name" name="lastname" id="lastname" placeholder="Last Name" class="@error('lastname') is-invalid @enderror">
                                 </fieldset>
                             </div>
+                            @error('lastname')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
                             <div class="col-lg-12">
                                 <fieldset>
-                                    <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                                    <input type="text" name="email" id="email"  placeholder="Your Email" class="@error('email') is-invalid @enderror" >
                                 </fieldset>
                             </div>
+                            @error('email')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea name="message" id="message" placeholder="Your Message" class="@error('message') is-invalid @enderror"></textarea>
+                                </fieldset>
+                            </div>
+                            @error('message')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
                             <div class="col-lg-12">
                                 <fieldset>
                                     <button type="submit" id="form-submit" class="main-gradient-button">Send Message</button>
                                 </fieldset>
                             </div>
                         </div>
+                        @if(session()->has('success'))
+                            <p class="alert alert-success mt-2">{{session()->get('success')}}</p>
+                        @endif
                     </form>
                 </div>
                 <div class="col-lg-12">

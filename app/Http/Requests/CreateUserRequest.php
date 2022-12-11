@@ -27,7 +27,7 @@ class CreateUserRequest extends FormRequest
                 'firstname' => 'bail|required|regex:/^[A-ZČĆŠĐŽ][a-zčćšđž]{2,19}(\s[A-ZČĆŠĐŽ][a-zčćšđž]{2,19})*$/',
                 'lastname' => 'bail|required|regex:/^[A-ZČĆŠĐŽ][a-zčćšđž]{2,19}(\s[A-ZČĆŠĐŽ][a-zčćšđž]{2,19})*$/',
                 'email' => 'bail|required|unique:users,email|regex:/^[\w\.\-]+\@([a-z0-9]+\.)+[a-z]{2,3}$/',
-                'password' => 'bail|required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', //Minimum eight characters, at least one letter and one number:
+                'password' => 'bail|required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/' //Minimum eight characters, at least one letter and one number:
         ];
     }
 

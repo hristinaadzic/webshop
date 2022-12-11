@@ -17,10 +17,17 @@
                     @endforeach
                 </p>
                 <p> Sizes available:
-                    @foreach($product->volumes as $vol)
-                        {{$vol->volumeInMillilitres}}ml
+                <ul class="list-group">
+                    @foreach($product->volumes as $volume)
+                        <li class="list-group-item">
+                            <input type="checkbox" name="categories[]" id="volume{{$volume->id}}" value="{{$volume->id}}"/> {{$volume->volumeInMillilitres}} ml
+                        </li>
                     @endforeach
+                </ul>
                 </p>
+                @if(session()->has('user'))
+                    <button type="button" onclick="addToCart({{$product->id}})" class="btn btn-danger mt-3 cart-btn">Add To Cart</button>
+                @endif
             </div>
         </div>
     </div>

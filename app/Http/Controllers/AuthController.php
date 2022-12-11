@@ -16,6 +16,11 @@ class AuthController extends Controller
         $email = $request->input("email");
         $password = md5($request->input("password"));
 
+        $request->validate([
+            'email' => 'bail|required|regex:/^[\w\.\-]+\@([a-z0-9]+\.)+[a-z]{2,3}$/',
+            'password' => 'bail|required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'
+        ]);
+
         try{
             $user = User::with('roles')->where('email', $email)->where('password', $password)->first();
             $user->IsAdmin = $user->roles->name == 'admin';
@@ -29,7 +34,8 @@ class AuthController extends Controller
             }
             return redirect()->route('login-form')->with('msg', 'Email or password is incorrect');
         }catch (\Exception $ex){
-            dd($ex->getMessage());
+            //dd($ex->getMessage());
+            return redirect()->route('login-form')->with('msg', 'Email or password is incorrect');
         }
     }
 

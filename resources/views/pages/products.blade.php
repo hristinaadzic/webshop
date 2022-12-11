@@ -67,7 +67,7 @@
                                         {{$vol->volumeInMillilitres}}
                                     @endforeach
                                 ml</p>
-                                <button type="button" onclick="addToCart({{$product->id}})" class="btn-sm btn-danger mt-2">Add to cart</button>
+                                <a type="button" class="btn-sm btn-danger mt-2" href="{{route('products.show',['product'=>$product->id])}}">Go Shop</a>
                             </div>
                         </div>
                     </div>

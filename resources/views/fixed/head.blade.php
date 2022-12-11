@@ -3,6 +3,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<script src="https://kit.fontawesome.com/1826bc2a0f.js" crossorigin="anonymous"></script>
 
 <title>@yield('title')</title>
 
