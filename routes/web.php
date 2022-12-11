@@ -56,6 +56,7 @@ Route::middleware(["isAdmin"])->group(function(){
     Route::get('/prices/create', [\App\Http\Controllers\PriceController::class, 'create'])->name('prices.create');
     Route::post('/prices/store', [\App\Http\Controllers\PriceController::class, 'store'])->name('prices.store');
     Route::get('/admin/orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('admin-orders');
+    Route::get('/admin/messages', [\App\Http\Controllers\MessageController::class, 'index'])->name('admin-messages');
 });
 
 Route::middleware(['isLoggedIn'])->group(function(){
@@ -67,6 +68,7 @@ Route::middleware(['isLoggedIn'])->group(function(){
 //base routes
 Route::get("/", [\App\Http\Controllers\HomeController::class, "index"])->name("home");
 Route::get("/home", [\App\Http\Controllers\HomeController::class, "index"])->name("home");
+Route::get("/author", [\App\Http\Controllers\HomeController::class, "author"])->name("author");
 Route::get("/about", [\App\Http\Controllers\AboutController::class, "index"])->name("about");
 Route::get("/products", [\App\Http\Controllers\ProductsController::class, "index"])->name("products");
 Route::get("/products/{product}", [\App\Http\Controllers\ProductsController::class, "show"])->name("products.show");

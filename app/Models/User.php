@@ -16,6 +16,10 @@ class User extends Model
     public function roles(){
         return $this->belongsTo(Role::class, 'roleId');
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

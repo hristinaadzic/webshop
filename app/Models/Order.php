@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
+    public function order_lines(){
+        return $this->hasMany(OrderLine::class,'orderId','id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'userId', 'id');
+    }
+
+
 }

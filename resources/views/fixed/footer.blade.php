@@ -23,19 +23,17 @@
             <div class="col-md-4 pt-5">
                 <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                 <ul class="list-unstyled text-light footer-link-list">
-                    <li><a class="text-decoration-none" href="shop.html">Necklaces</a></li>
-                    <li><a class="text-decoration-none" href="shop.html">Rings</a></li>
-                    <li><a class="text-decoration-none" href="shop.html">Bacelets</a></li>
-                    <li><a class="text-decoration-none" href="shop.html">Earings</a></li>
+                    <li><a class="text-decoration-none" href="{{route('products')}}">Gucci</a></li>
+                    <li><a class="text-decoration-none" href="{{route('products')}}">Armani</a></li>
+                    <li><a class="text-decoration-none" href="{{route('products')}}">Tom Ford</a></li>
+                    <li><a class="text-decoration-none" href="{{route('products')}}">Prada</a></li>
                 </ul>
             </div>
 
             <div class="col-md-4 pt-5">
                 <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                 <ul class="list-unstyled text-light footer-link-list">
-                    <li><a class="text-decoration-none" href="author.html">Author</a></li>
-                    <li><a class="text-decoration-none" href="docs.pdf">Docs</a></li>
-                    <li><a class="text-decoration-none" href="sitemap.xml">sitemap</a></li>
+                    <li><a class="text-decoration-none" href="{{route('author')}}">Author</a></li>
 
                 </ul>
             </div>

@@ -20,7 +20,7 @@ class ProductsController extends Controller
      */
 
     public function index(Request $request){
-        $products = Product::with('brands', 'categories')->where("isDeleted", false);
+        $products = Product::with('brands', 'categories', 'prices')->where("isDeleted", false);
         $this->data["genders"] = Gender::get();
         $this->data["categories"] = Category::where("isDeleted", false)->get();
         $this->data["brands"] = Brand::where("isDeleted", false)->get();

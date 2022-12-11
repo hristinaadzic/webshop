@@ -15,7 +15,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['orders'] = Order::with('order_lines','user')->get();
+        return view('admin.pages.orders', $this->data);
     }
 
     /**

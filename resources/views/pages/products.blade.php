@@ -40,7 +40,7 @@
 
             <div class="col-lg-9">
             @php
-            //dd($products)
+           // dd($products)
             @endphp
                 <div class="row">
                     @if(count($products) == 0)
@@ -61,12 +61,17 @@
                                         {{$cat->name}}
                                     @endforeach
                                 </p>
-                                <h5 class="text-end">$24.99</h5>
                                 <p class="card text"> Available in
                                     @foreach($product->volumes as $vol)
                                         {{$vol->volumeInMillilitres}}
                                     @endforeach
                                 ml</p>
+                                <p class="card text"> Prices for given volumes
+                                    @foreach($product->prices as $p)
+                                        {{$p->priceValue}} $
+                                    @endforeach
+                                    </p>
+
                                 <a type="button" class="btn-sm btn-danger mt-2" href="{{route('products.show',['product'=>$product->id])}}">Go Shop</a>
                             </div>
                         </div>
